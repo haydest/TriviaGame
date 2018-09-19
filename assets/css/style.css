@@ -1,0 +1,19 @@
+
+* {
+    background-color: #c75b87;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: auto;
+    text-align: center;
+    margin-top: 50px;
+    width: 50%;
+    border: 5px solid #f3d588;
+    padding: 15px;
+}
+
+h1 {
+    font-family: 'Montserrat Subrayada', sans-serif;
+    font-size: 50px;
+}
