@@ -14,73 +14,133 @@
   <div id="time-remaining">
       <button>click here to start the game!</button>
   </div>
+  <br>
+  <br>
   <div id="questions"></div>
 
 <script>
 
 $(document).ready(function() {
     
-
-var time = document.getElementById("time-remaining");
 var questions = [
   {
-    question: "alvar aalto was a 20th century ______ architect and designer.",
+    question: "1 | alvar aalto was a 20th century ______ architect and designer.",
     choices: ["norwegian", "finnish", "croatian", "viennese"],
     correctAnswer: "finnish",
     },
   {
-    question: "some of aalto's most recognizeable furniture designs were constructed using _______ wood.",
+    question: "2 | some of aalto's most recognizeable furniture designs were constructed using _______ wood.",
     choices: ["stained", "carved", "pressure treated", "laminated"],
     correctAnswer: "laminated",
     }, 
   {
-    question: "this building was considered one of the most influential of aalto's career: ",
+    question: "3 | this building was considered one of the most influential of aalto's career: ",
     choices: ["la fondazione de querini stampalia", "hagia sofia", "villa mairea", "looshaus"],
     correctAnswer: "villa mairea",
     },
   {
-    question: "built early in his career, the viipuri library exemplifies a ________ style.",
+    question: "4 | built early in his career, the viipuri library exemplifies a ________ style.",
     choices: ["traditionalist", "monumentalist", "modernist", "functionalist"],
     correctAnswer: "functionalist", 
     },  
   {
-    question: "which cultural precedent is consistently used in aalto's modernist works and those of le corbusier?",
+    question: "5 | which cultural precedent is consistently used in aalto's modernist works and those of le corbusier?",
     choices: ["japanese", "indian", "venetian", "french"],
     correctAnswer: "japanese",
     },
   {
-    question: "aalto's awards and honors do not include: ",
+    question: "6 | aalto's awards and honors do not include: ",
     choices: ["the prince eugen medal", "the royal gold medal for architecture from the royal Institute of british architects", " the gold medal from the american institute of architects", "the pritzker architecture prize"],
     correctAnswer: "the pritzker architecture prize",
     }, 
   {
-    question: "which of the following was not designed by aalto?",
+    question: "7 | which of the following was not designed by aalto?",
     choices: ["secretariat building", "church of santa maria assunta", "sawmill at varkaus", "library at the mount angel abbey"],
     correctAnswer: "secretariat building",
     },
   {
-    question: "the initial sketches for the design of the aalto vase were drawn using: ",
+    question: "8 | the initial sketches for the design of the aalto vase were drawn using: ",
     choices: ["pencil", "pen and ink", "watercolor", "crayon"],
     correctAnswer: "crayon",
     }, 
   {
-    question: "aalto and his wife aino founded which of these furniture companies?",
+    question: "9 | aalto and his wife aino founded which of these furniture companies?",
     choices: ["knoll", "gesamtkunstwerk", "artek", "vitra"],
     correctAnswer: "artek",
     },
   {
-    question: "much like the american architect ______ , aalto's early portfolio was predominantly single family homes.",
+    question: "10 | much like the american architect ______ , aalto's early portfolio was predominantly single family homes.",
     choices: ["elizabeth diller", "frank lloyd wright", "louis kahn", "zaha hadid (rip)"],
-    correctAnswer: "frank lloyd wright"
-    }],        
-
-$("#time-remaining").on("click", function() {
+    correctAnswer: "frank lloyd wright",
+    }];   
+    
+    var count=61;
+    var questionCounter=0;
+    var score=0;
+   
+  $("#time-remaining").on("click", function() {
     $("#time-remaining").empty();
+    
+    var counter=setInterval(timer, 1000);
+    function timer() {
+    count=count-1;
+       if (count === 0) {
+       clearInterval(counter);
+       return;
+    };
+
+    $("#time-remaining").html("time remaining: " + count);
+  };
+  timer();
+
+for (i=0; i<questions.length; i++) {
+
+$("#questions").append("<p><strong>" + 
+    		questions[i].question + 
+    		"</p><br><p class='choices'>" + 
+    		questions[i].choices[0] + 
+    		"</p><br><p class='choices'>" + 
+    		questions[i].choices[1] + 
+    		"</p><br><p class='choices'>" + 
+    		questions[i].choices[2] + 
+    		"</p><br><p class='choices'>" + 
+    		questions[i].choices[3] + 
+    		"</strong></p><br><br>")};
+    });
+    
+  $("#questions").on("click", ".choices", (function() {
+        var userGuess = $(this).text();
+        console.log(userGuess);
+		if (userGuess === questions[questionCounter].correctAnswer) {
+            score++;
+            console.log(score);
+
+        }
+  })); 
+  
+  if (count===1 && score===10) {
+      $("#questions").empty();
+      $("#time-remaining").empty();
+      $("#time-remaining").text("perfect score!")
+  }
+  else if (count===1 && score>5) {
+      $("#questions").empty();
+      $("#time-remaining").empty();
+      $("#time-remaining").text("good job! you scored: " + score + "/10")
+  }
+  if (count===1 && score===10) {
+      $("#questions").empty();
+      $("#time-remaining").empty();
+      $("#time-remaining").text("you don't know shit about alvar aalto. you scored: " + score + "/10")
+  }
 
 });
 
+//function endGame() {
+    //if (count === 0) {}
+//}
     
-}); 
+
 
 
 
